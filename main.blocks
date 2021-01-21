@@ -15,7 +15,7 @@ c b d d c c b 5 5 5 5 5 5 5 b .
 . c d d d d d d 5 5 5 5 5 d b . 
 . . c b d d d d d 5 5 5 b b . . 
 . . . c c c c c c c c b b . . . 
-`</field></shadow></value><value name="kind"><shadow type="spritekind" id="RK2KEw~tY.aWH`=9Je!a"><field name="MEMBER">Player</field></shadow></value></block></value><next><block type="gamesetbackgroundimage" id="*l=ti)K^F^SUj)aZ9*hm"><value name="img"><shadow type="background_image_picker" id="S{aB5NT#9ncL{^^Z}-y:"><field name="img">img`
+`</field></shadow></value><value name="kind"><shadow type="spritekind" id="RK2KEw~tY.aWH`=9Je!a"><field name="MEMBER">Player</field></shadow></value></block></value><next><block type="game_control_sprite" id="|kJRt*?X+!_okA5I_c6#"><mutation xmlns="http://www.w3.org/1999/xhtml" _expanded="0" _input_init="false"></mutation><value name="sprite"><block type="variables_get" id="61^]=0P1j1gPR;^W5#[k"><field name="VAR" id="]W[zRvc7HLFR*q#|eCJt">mySprite</field></block></value><next><block type="gamesetbackgroundimage" id="*l=ti)K^F^SUj)aZ9*hm"><value name="img"><shadow type="background_image_picker" id="S{aB5NT#9ncL{^^Z}-y:"><field name="img">img`
 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -136,4 +136,4 @@ d77777777777777777777dddddddddddd77777dddddddddddddddd99999999999ddddddddddddddd
 7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
 7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
 7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
-`</field></shadow></value><next><block type="camerafollow" id="0GH)mnY4Lw3CKtY~|EhR"><value name="sprite"><block type="variables_get" id="#v1*z4.D`=Dd;vUmY@@Y"><field name="VAR" id="]W[zRvc7HLFR*q#|eCJt">mySprite</field></block></value><next><block type="game_control_sprite" id="|kJRt*?X+!_okA5I_c6#"><mutation xmlns="http://www.w3.org/1999/xhtml" _expanded="0" _input_init="false"></mutation><value name="sprite"><block type="variables_get" id="61^]=0P1j1gPR;^W5#[k"><field name="VAR" id="]W[zRvc7HLFR*q#|eCJt">mySprite</field></block></value></block></next></block></next></block></next></block></statement></block></xml>
+`</field></shadow></value></block></next></block></next></block></statement></block></xml>
