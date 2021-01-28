@@ -1,5 +1,7 @@
 namespace SpriteKind {
     export const coin = SpriteKind.create()
+    export const flower = SpriteKind.create()
+    export const flowers = SpriteKind.create()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`tile`, function (sprite, location) {
     game.over(false, effects.dissolve)
@@ -13,9 +15,74 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.coin, function (sprite, otherSpr
     info.changeScoreBy(1)
     otherSprite.destroy()
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.flowers, function (sprite, otherSprite) {
+    otherSprite.destroy()
+    bee = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Enemy)
+    animation.runImageAnimation(
+    bee,
+    [img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . 1 . . . 1 . . . 1 . . . 
+        . . . . . 1 1 1 . 1 1 1 . . . . 
+        . . . . . . 1 . . . 1 . . . . . 
+        . . . . f f f f f f f f f . . . 
+        . . . f 5 5 5 5 1 5 1 5 f . . . 
+        . f f f 5 5 5 5 5 5 5 5 f . . . 
+        . . . f 5 5 5 5 5 5 5 5 f . . . 
+        . . . . f f f f f f f f f . . . 
+        . . . . . f f . . f f . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . f f f f f f f f f . . . 
+        . . . f 5 5 5 5 1 5 1 5 f . . . 
+        . f f f 5 5 5 5 5 5 5 5 f . . . 
+        . . . f 5 5 5 5 5 5 5 5 f . . . 
+        . . . . f f f f f f f f f . . . 
+        . . . . . f f . . f f . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `],
+    100,
+    true
+    )
+    bee.setPosition(duck.x + 80, duck.x - 80)
+    bee.follow(duck)
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`tile0`, function (sprite, location) {
     game.over(true, effects.confetti)
 })
+let bee: Sprite = null
+let flowers: Sprite = null
 let coin: Sprite = null
 let duck: Sprite = null
 scene.setBackgroundImage(img`
@@ -375,5 +442,27 @@ for (let value of tiles.getTilesByType(assets.tile`tile4`)) {
     true
     )
     tiles.placeOnTile(coin, value)
+    tiles.setTileAt(value, assets.tile`transparency16`)
+}
+for (let value of tiles.getTilesByType(assets.tile`tile5`)) {
+    flowers = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . 3 a . . a 3 . . . . . . . 
+        . . . a 3 2 2 3 a . . . . . . . 
+        . . . . a 3 3 a . . . . . . . . 
+        . . . . . f f . . . . . . . . . 
+        . . 7 7 . . 7 . . 7 7 . . . . . 
+        . . 7 7 7 . 7 . 7 7 7 . . . . . 
+        . . . 8 7 7 7 7 7 8 . . . . . . 
+        . . . 8 8 7 7 7 8 . . . . . . . 
+        . . . . . 8 7 8 8 . . . . . . . 
+        . . . . . . 7 8 . . . . . . . . 
+        `, SpriteKind.flowers)
+    tiles.placeOnTile(flowers, value)
     tiles.setTileAt(value, assets.tile`transparency16`)
 }
