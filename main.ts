@@ -371,8 +371,8 @@ for (let value of tiles.getTilesByType(assets.tile`tile4`)) {
         . . . . . f f f f f . . . . . . 
         . . . . . . . . . . . . . . . . 
         `],
-    500,
-    false
+    100,
+    true
     )
     tiles.placeOnTile(coin, value)
     tiles.setTileAt(value, assets.tile`transparency16`)
