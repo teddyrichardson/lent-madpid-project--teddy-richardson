@@ -1,5 +1,10 @@
+scene.onOverlapTile(SpriteKind.Player, assets.tile`tile`, function (sprite, location) {
+    game.over(false, effects.dissolve)
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    mySprite.vy = -150
+    if (mySprite.vy == 0) {
+        mySprite.vy = -150
+    }
 })
 let mySprite: Sprite = null
 scene.setBackgroundImage(img`
