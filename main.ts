@@ -6,6 +6,9 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         mySprite.vy = -150
     }
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`tile0`, function (sprite, location) {
+    game.over(true, effects.confetti)
+})
 let mySprite: Sprite = null
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
