@@ -2,7 +2,8 @@
     "name": "lent madpid project- teddy richardson",
     "description": "",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "animation": "*"
     },
     "files": [
         "main.blocks",
