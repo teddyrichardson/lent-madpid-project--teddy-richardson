@@ -1,15 +1,23 @@
+namespace SpriteKind {
+    export const coin = SpriteKind.create()
+}
 scene.onOverlapTile(SpriteKind.Player, assets.tile`tile`, function (sprite, location) {
     game.over(false, effects.dissolve)
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (mySprite.vy == 0) {
-        mySprite.vy = -150
+    if (duck.vy == 0) {
+        duck.vy = -200
     }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.coin, function (sprite, otherSprite) {
+    info.changeScoreBy(1)
+    otherSprite.destroy()
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`tile0`, function (sprite, location) {
     game.over(true, effects.confetti)
 })
-let mySprite: Sprite = null
+let coin: Sprite = null
+let duck: Sprite = null
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -132,7 +140,7 @@ scene.setBackgroundImage(img`
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     `)
-mySprite = sprites.create(img`
+duck = sprites.create(img`
     . . . . . . . . . . b 5 b . . . 
     . . . . . . . . . b 5 b . . . . 
     . . . . . . . . . b c . . . . . 
@@ -150,7 +158,29 @@ mySprite = sprites.create(img`
     . . c b d d d d d 5 5 5 b b . . 
     . . . c c c c c c c c b b . . . 
     `, SpriteKind.Player)
-controller.moveSprite(mySprite, 100, 0)
+controller.moveSprite(duck, 100, 0)
 tiles.setTilemap(tilemap`level1`)
-mySprite.ay = 350
-scene.cameraFollowSprite(mySprite)
+duck.ay = 350
+scene.cameraFollowSprite(duck)
+for (let value of tiles.getTilesByType(assets.tile`tile4`)) {
+    coin = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . f f f f f f f . . . . . 
+        . . . f 5 5 5 5 5 5 5 f . . . . 
+        . . f f 5 5 5 4 4 4 5 5 f . . . 
+        . f 5 5 5 5 5 5 5 5 5 5 5 f . . 
+        . f 5 5 4 4 4 4 4 5 5 5 5 f . . 
+        . f 5 5 5 5 5 5 5 5 5 4 5 f . . 
+        . f 5 4 5 5 5 5 5 5 4 4 5 f . . 
+        . f 5 4 5 5 5 5 5 4 4 5 5 f . . 
+        . f 5 5 5 5 4 5 5 5 5 5 5 f . . 
+        . f 5 5 5 5 5 5 5 5 5 5 5 f . . 
+        . . f 5 5 5 4 4 5 5 5 5 f . . . 
+        . . . f 5 5 5 5 5 5 5 f . . . . 
+        . . . . f f f f f f f . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.coin)
+    tiles.placeOnTile(coin, value)
+    tiles.setTileAt(value, assets.tile`transparency16`)
+}
