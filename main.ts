@@ -215,6 +215,7 @@ scene.setBackgroundImage(img`
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     `)
+tiles.setTilemap(tilemap`level0`)
 duck = sprites.create(img`
     . . . . . . . . . . b 5 b . . . 
     . . . . . . . . . b 5 b . . . . 
@@ -236,7 +237,6 @@ duck = sprites.create(img`
 controller.moveSprite(duck, 100, 0)
 duck.ay = 350
 scene.cameraFollowSprite(duck)
-info.setLife(6)
 for (let value of tiles.getTilesByType(assets.tile`tile4`)) {
     coin = sprites.create(img`
         . . . . . . . . . . . . . . . . 
@@ -281,18 +281,4 @@ for (let value of tiles.getTilesByType(assets.tile`tile5`)) {
     tiles.placeOnTile(flowers, value)
     tiles.setTileAt(value, assets.tile`transparency16`)
 }
-forever(function () {
-    let level = 0
-    if (level == 1) {
-        tiles.setTilemap(tilemap`level1`)
-    }
-    if (level == 2) {
-        tiles.setTilemap(tilemap`level1`)
-    }
-    if (level == 3) {
-        tiles.setTilemap(tilemap`level1`)
-    }
-    if (level == 4) {
-        game.over(true)
-    }
-})
+info.setLife(6)
