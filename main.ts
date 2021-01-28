@@ -237,6 +237,8 @@ duck = sprites.create(img`
 controller.moveSprite(duck, 100, 0)
 duck.ay = 350
 scene.cameraFollowSprite(duck)
+info.setLife(6)
+let level = 1
 for (let value of tiles.getTilesByType(assets.tile`tile4`)) {
     coin = sprites.create(img`
         . . . . . . . . . . . . . . . . 
@@ -281,4 +283,3 @@ for (let value of tiles.getTilesByType(assets.tile`tile5`)) {
     tiles.placeOnTile(flowers, value)
     tiles.setTileAt(value, assets.tile`transparency16`)
 }
-info.setLife(6)
