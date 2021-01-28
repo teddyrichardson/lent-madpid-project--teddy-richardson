@@ -81,6 +81,14 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.flowers, function (sprite, other
 scene.onOverlapTile(SpriteKind.Player, assets.tile`tile0`, function (sprite, location) {
     game.over(true, effects.confetti)
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    otherSprite.destroy()
+    if (duck.y < otherSprite.y) {
+        info.changeScoreBy(1)
+    } else {
+        info.changeLifeBy(-1)
+    }
+})
 let bee: Sprite = null
 let flowers: Sprite = null
 let coin: Sprite = null
@@ -229,6 +237,7 @@ controller.moveSprite(duck, 100, 0)
 tiles.setTilemap(tilemap`level1`)
 duck.ay = 350
 scene.cameraFollowSprite(duck)
+info.setLife(6)
 for (let value of tiles.getTilesByType(assets.tile`tile4`)) {
     coin = sprites.create(img`
         . . . . . . . . . . . . . . . . 
