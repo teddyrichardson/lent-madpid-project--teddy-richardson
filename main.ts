@@ -234,7 +234,6 @@ duck = sprites.create(img`
     . . . c c c c c c c c b b . . . 
     `, SpriteKind.Player)
 controller.moveSprite(duck, 100, 0)
-tiles.setTilemap(tilemap`level1`)
 duck.ay = 350
 scene.cameraFollowSprite(duck)
 info.setLife(6)
@@ -282,3 +281,18 @@ for (let value of tiles.getTilesByType(assets.tile`tile5`)) {
     tiles.placeOnTile(flowers, value)
     tiles.setTileAt(value, assets.tile`transparency16`)
 }
+forever(function () {
+    let level = 0
+    if (level == 1) {
+        tiles.setTilemap(tilemap`level1`)
+    }
+    if (level == 2) {
+        tiles.setTilemap(tilemap`level1`)
+    }
+    if (level == 3) {
+        tiles.setTilemap(tilemap`level1`)
+    }
+    if (level == 4) {
+        game.over(true)
+    }
+})
