@@ -78,8 +78,71 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.flowers, function (sprite, other
     bee.setPosition(duck.x + 80, duck.x - 80)
     bee.follow(duck)
 })
+function startlevel () {
+    if (current_level == 0) {
+        tiles.setTilemap(tilemap`level0`)
+    } else if (current_level == 1) {
+        tiles.setTilemap(tilemap`level14`)
+    } else if (current_level == 2) {
+        tiles.setTilemap(tilemap`level15`)
+    } else {
+        game.over(true, effects.confetti)
+    }
+    tiles.placeOnRandomTile(duck, assets.tile`tile6`)
+    for (let value of tiles.getTilesByType(assets.tile`tile6`)) {
+        tiles.setTileAt(value, assets.tile`transparency16`)
+    }
+    duck.ay = 350
+    scene.cameraFollowSprite(duck)
+    info.setLife(6)
+    for (let value of tiles.getTilesByType(assets.tile`tile4`)) {
+        coin = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . f f f f f f f . . . . . 
+            . . . f 5 5 5 5 5 5 5 f . . . . 
+            . . f f 5 5 5 4 4 4 5 5 f . . . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 f . . 
+            . f 5 5 4 4 4 4 4 5 5 5 5 f . . 
+            . f 5 5 5 5 5 5 5 5 5 4 5 f . . 
+            . f 5 4 5 5 5 5 5 5 4 4 5 f . . 
+            . f 5 4 5 5 5 5 5 4 4 5 5 f . . 
+            . f 5 5 5 5 4 5 5 5 5 5 5 f . . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 f . . 
+            . . f 5 5 5 4 4 5 5 5 5 f . . . 
+            . . . f 5 5 5 5 5 5 5 f . . . . 
+            . . . . f f f f f f f . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.coin)
+        tiles.placeOnTile(coin, value)
+        tiles.setTileAt(value, assets.tile`transparency16`)
+    }
+    for (let value of tiles.getTilesByType(assets.tile`tile5`)) {
+        flowers = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . 3 a . . a 3 . . . . . . . 
+            . . . a 3 2 2 3 a . . . . . . . 
+            . . . . a 3 3 a . . . . . . . . 
+            . . . . . f f . . . . . . . . . 
+            . . 7 7 . . 7 . . 7 7 . . . . . 
+            . . 7 7 7 . 7 . 7 7 7 . . . . . 
+            . . . 8 7 7 7 7 7 8 . . . . . . 
+            . . . 8 8 7 7 7 8 . . . . . . . 
+            . . . . . 8 7 8 8 . . . . . . . 
+            . . . . . . 7 8 . . . . . . . . 
+            `, SpriteKind.flowers)
+        tiles.placeOnTile(flowers, value)
+        tiles.setTileAt(value, assets.tile`transparency16`)
+    }
+}
 scene.onOverlapTile(SpriteKind.Player, assets.tile`tile0`, function (sprite, location) {
-    game.over(true, effects.confetti)
+    current_level += 1
+    startlevel()
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     otherSprite.destroy()
@@ -89,10 +152,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
         info.changeLifeBy(-1)
     }
 })
-let bee: Sprite = null
 let flowers: Sprite = null
 let coin: Sprite = null
+let bee: Sprite = null
 let duck: Sprite = null
+let current_level = 0
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -215,7 +279,7 @@ scene.setBackgroundImage(img`
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     `)
-tiles.setTilemap(tilemap`level0`)
+current_level = 2
 duck = sprites.create(img`
     . . . . . . . . . . b 5 b . . . 
     . . . . . . . . . b 5 b . . . . 
@@ -235,50 +299,4 @@ duck = sprites.create(img`
     . . . c c c c c c c c b b . . . 
     `, SpriteKind.Player)
 controller.moveSprite(duck, 100, 0)
-duck.ay = 350
-scene.cameraFollowSprite(duck)
-info.setLife(6)
-for (let value of tiles.getTilesByType(assets.tile`tile4`)) {
-    coin = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . f f f f f f f . . . . . 
-        . . . f 5 5 5 5 5 5 5 f . . . . 
-        . . f f 5 5 5 4 4 4 5 5 f . . . 
-        . f 5 5 5 5 5 5 5 5 5 5 5 f . . 
-        . f 5 5 4 4 4 4 4 5 5 5 5 f . . 
-        . f 5 5 5 5 5 5 5 5 5 4 5 f . . 
-        . f 5 4 5 5 5 5 5 5 4 4 5 f . . 
-        . f 5 4 5 5 5 5 5 4 4 5 5 f . . 
-        . f 5 5 5 5 4 5 5 5 5 5 5 f . . 
-        . f 5 5 5 5 5 5 5 5 5 5 5 f . . 
-        . . f 5 5 5 4 4 5 5 5 5 f . . . 
-        . . . f 5 5 5 5 5 5 5 f . . . . 
-        . . . . f f f f f f f . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.coin)
-    tiles.placeOnTile(coin, value)
-    tiles.setTileAt(value, assets.tile`transparency16`)
-}
-for (let value of tiles.getTilesByType(assets.tile`tile5`)) {
-    flowers = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . 3 a . . a 3 . . . . . . . 
-        . . . a 3 2 2 3 a . . . . . . . 
-        . . . . a 3 3 a . . . . . . . . 
-        . . . . . f f . . . . . . . . . 
-        . . 7 7 . . 7 . . 7 7 . . . . . 
-        . . 7 7 7 . 7 . 7 7 7 . . . . . 
-        . . . 8 7 7 7 7 7 8 . . . . . . 
-        . . . 8 8 7 7 7 8 . . . . . . . 
-        . . . . . 8 7 8 8 . . . . . . . 
-        . . . . . . 7 8 . . . . . . . . 
-        `, SpriteKind.flowers)
-    tiles.placeOnTile(flowers, value)
-    tiles.setTileAt(value, assets.tile`transparency16`)
-}
+startlevel()
